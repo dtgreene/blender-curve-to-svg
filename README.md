@@ -1,4 +1,5 @@
-Basic Blender script for converting selected 2D curve objects into SVGs.
+Simple Blender script for converting selected 2D curve objects into SVGs.
+This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blender-curve-to-svg) extension which no longer seems to work.
 
 ## Usage
 1. Open the scripting tab.
@@ -8,9 +9,7 @@ Basic Blender script for converting selected 2D curve objects into SVGs.
 
 ### Some important notes:
 - The curve shape must be set to 2D.
-- Location, rotation, and scale transformations must be applied first.  These wouldn't be too hard to add support for but I wanted to keep things simple.
-
-This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blender-curve-to-svg) extension which no longer seems to work.
+- Location, rotation, and scale transformations must be applied first.  These wouldn't be too hard to add support for if really needed.
 
 ### Blender
 ![image](https://github.com/user-attachments/assets/0da112b9-3175-4f34-a614-bca917c81aaf)
