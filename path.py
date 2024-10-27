@@ -8,7 +8,9 @@ from enum import Enum
 precision = 4
 target_width = 256
 target_height = 256
-output_path = 'C:\\Users\\Dylan\\Desktop\\my_svg.svg'
+x_margin = 10
+y_margin = 10
+output_path = 'C:\\Users\\Dylan\\Downloads\\monsterra.svg'
 
 CommandType = Enum('CommandType', ['MoveTo', 'CurveTo', 'ClosePath'])
 
@@ -131,25 +133,40 @@ def main():
                 bounds.min_y = min(command.pos[1], bounds.min_y)
                 bounds.max_y = max(command.pos[1], bounds.max_y)
 
-    bounds_width = abs(bounds.max_x) - abs(bounds.min_x)
-    bounds_height = abs(bounds.max_y) - abs(bounds.min_y)
+    input_width = abs(bounds.max_x) - abs(bounds.min_x)
+    input_height = abs(bounds.max_y) - abs(bounds.min_y)
     
-    flip_factor = Vector((1.0, -1.0))
-    flip_offset = Vector((0.0, bounds_height))
-    base_offset = Vector((-bounds.min_x, -bounds.min_y))
+    output_width = target_width - x_margin * 2.0
+    output_height = target_height - y_margin * 2.0
     
     # Determine the scale needed to reach the target dimensions
-    scale_factor = min(target_width / bounds_width, target_height / bounds_height)
+    scale_factor = min(output_width / input_width, output_height / input_height)
     
+    # Offset the points based on the bounds minimums. This makes the points essentially start at (0, 0).
+    reset_offset = Vector((-bounds.min_x, -bounds.min_y))
+    # Flip the image on the y-axis
+    flip_factor = Vector((1.0, -1.0))
+    # After flipping, the points need to be offset by the height to bring them back into view.
+    flip_offset = Vector((0.0, input_height))
+    # The dimensions already factored in 2x the margins, here we just need to move the points over by the margin values.
+    margin_offset = Vector((x_margin, y_margin))
+    # Aligns the points to the middle
+    align_offset = Vector((
+        (output_width - input_width * scale_factor) * 0.5, 
+        (output_height - input_height * scale_factor) * 0.5
+    ))
+
     # Scale and accumulate commands
     for path in all_paths:
         path_data = []
         for command in path:
             if command.command_type == CommandType.MoveTo or command.command_type == CommandType.CurveTo:
-                command.translate(base_offset)
+                command.translate(reset_offset)
                 command.scale(flip_factor)
                 command.translate(flip_offset)
                 command.scale(scale_factor)
+                command.translate(margin_offset)
+                command.translate(align_offset)
             
             path_data.append(command.to_d())
         
@@ -157,11 +174,7 @@ def main():
         path_element.set('d', ' '.join(path_data))
         svg.append(path_element)
 
-    # Scale the bounding dimensions 
-    bounds_width = bounds_width * scale_factor
-    bounds_height = bounds_height * scale_factor
-    
-    svg.set('viewBox', f'0 0 {bounds_width} {bounds_height}')
+    svg.set('viewBox', f'0 0 {target_width} {target_height}')
     
     f = open(output_path, 'w')
     f.write(pretty_xml(svg))
