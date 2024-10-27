@@ -9,7 +9,8 @@ This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blende
 
 ### Some important notes:
 - The curve shape must be set to 2D.
-- Location, rotation, and scale transformations must be applied first.  These wouldn't be too hard to add support for if really needed.
+- Location, rotation, and scale transformations must be applied first (while the curve is in 3D mode).
+- The bounding box is calculated based on each curve's "curve to" position. That means its possible the lines can curve outside of the target dimensions.  In these cases you can use the `x_margin` and `y_margin` values to add margins around the result.
 
 ### Blender
 ![image](https://github.com/user-attachments/assets/0da112b9-3175-4f34-a614-bca917c81aaf)
