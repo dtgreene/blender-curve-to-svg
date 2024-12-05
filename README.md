@@ -4,13 +4,13 @@ This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blende
 ## Usage
 1. Open the scripting tab.
 2. Paste in the script.
-3. Change the output path and any other input arguments as needed.
+3. Change the output path and any other values as needed.
 4. Select the curves you want to convert and run the script.
 
 ### Some important notes:
-- The curve shape must be set to 2D.
+- Disable `enable_auto_fit` when dimensionsal accuracy is important.  Auto-fit automatically scales and centers the final image to fit within a target set of dimensions.  
+- The curve type must be set to 2D.
 - Location, rotation, and scale transformations must be applied first (while the curve is in 3D mode).
-- The bounding box is calculated based on each curve's "curve to" position. That means its possible the lines can curve outside of the target dimensions.  In these cases you can use the `x_margin` and `y_margin` values to add margins around the result.
 
 ### Blender
 ![image](https://github.com/user-attachments/assets/0da112b9-3175-4f34-a614-bca917c81aaf)
