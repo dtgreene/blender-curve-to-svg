@@ -8,7 +8,8 @@ This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blende
 4. Select the curves you want to convert and run the script.
 
 ### Some important notes:
-- Disable `enable_auto_fit` when dimensionsal accuracy is important.  Auto-fit automatically scales and centers the final image to fit within a target set of dimensions.  
+- There's no support for NURBS curve types since there hasn't been a need yet.
+- Disable `enable_auto_fit` when dimensionsal accuracy is important.  Auto-fit automatically scales and centers the image to fit within a target set of dimensions.  With auto-fit disabled, only the base transformations (y-flip and resetting the origin) will be applied.
 - The curve type must be set to 2D.
 - Location, rotation, and scale transformations must be applied first (while the curve is in 3D mode).
 
