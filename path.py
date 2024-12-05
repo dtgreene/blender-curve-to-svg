@@ -7,8 +7,6 @@ from enum import Enum
 
 precision = 4
 
-
-# Auto-fit scales and centers the image within the target dimensions including margins
 # Auto-fit settings
 enable_auto_fit = True
 target_width = 256
