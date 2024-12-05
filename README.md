@@ -13,8 +13,4 @@ This was based on the [blender-curve-to-svg](https://github.com/aryelgois/blende
 - The curve type must be set to 2D.
 - Location, rotation, and scale transformations must be applied first (while the curve is in 3D mode).
 
-### Blender
-![image](https://github.com/user-attachments/assets/0da112b9-3175-4f34-a614-bca917c81aaf)
-
-### Output
-![my_svg](https://github.com/user-attachments/assets/3ea02110-c9f0-4d69-a8b0-374cb4d56d77)
+![image](https://github.com/user-attachments/assets/55b6a648-01b3-41f2-b595-45b2e57b1874)
