@@ -7,6 +7,8 @@ from enum import Enum
 
 precision = 4
 
+
+# Auto-fit scales and centers the image within the target dimensions including margins
 # Auto-fit settings
 enable_auto_fit = True
 target_width = 256
@@ -16,6 +18,8 @@ y_margin = 10
 
 # Absolute output path
 output_path = 'C:\\Users\\Dylan\\Downloads\\blender_output.svg'
+# The amount to scale all points.  By default, values are in meters.
+unit_scale = 1000.0
 
 CommandType = Enum('CommandType', ['MoveTo', 'CurveTo', 'ClosePath', 'LineTo'])
 
@@ -140,10 +144,10 @@ def main():
                 case _:
                     raise ValueError('NURBS spline type is not currently supported.')
 
-    # Convert from meters to millimeters
+    # Scale all points to match the desired units
     for path in all_paths:
         for command in path:
-            command.scale(1000.0)
+            command.scale(unit_scale)
     
     # Calculate the bounding box for the commands
     bounds = Bounds()
@@ -158,8 +162,6 @@ def main():
 
     input_width = bounds.max_x - bounds.min_x
     input_height = bounds.max_y - bounds.min_y
-    
-    
     
     # Offset the points based on the bounds minimums. This makes the points essentially start at (0, 0).
     reset_offset = Vector((-bounds.min_x, -bounds.min_y))
@@ -190,6 +192,7 @@ def main():
         path_element.set('d', ' '.join(path_data))
         svg.append(path_element)
 
+    # Set the view box
     if enable_auto_fit:
         svg.set('viewBox', f'0 0 {target_width}mm {target_height}mm')
     else:
