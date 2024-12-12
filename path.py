@@ -193,11 +193,20 @@ def main():
         path_element.set('d', ' '.join(path_data))
         svg.append(path_element)
 
-    # Set the view box
+    # Determine SVG dimensions
+    svg_width = 0
+    svg_height = 0
+    
     if enable_auto_fit:
-        svg.set('viewBox', f'0 0 {target_width}mm {target_height}mm')
+        svg_width = target_width
+        svg_height = target_height
     else:
-        svg.set('viewBox', f'0 0 {round(input_width, precision)}mm {round(input_height, precision)}mm')
+        svg_width = round(input_width, precision)
+        svg_height = round(input_height, precision)
+    
+    svg.set('viewBox', f'0 0 {svg_width} {svg_height}')
+    svg.set('width', f'{svg_width}mm')
+    svg.set('height', f'{svg_height}mm')
     
     f = open(output_path, 'w')
     f.write(pretty_xml(svg))
