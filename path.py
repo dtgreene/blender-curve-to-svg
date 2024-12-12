@@ -5,6 +5,7 @@ from math import pi, inf
 from mathutils import Vector
 from enum import Enum
 
+# The amount of numbers following the decimal when writing values to the final SVG.
 precision = 4
 
 # Auto-fit scales and centers the image within the target dimensions including margins
