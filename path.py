@@ -7,10 +7,10 @@ from enum import Enum
 
 precision = 4
 
-
 # Auto-fit scales and centers the image within the target dimensions including margins
-# Auto-fit settings
 enable_auto_fit = True
+
+# Auto-fit settings
 target_width = 256
 target_height = 256
 x_margin = 10
@@ -18,7 +18,7 @@ y_margin = 10
 
 # Absolute output path
 output_path = 'C:\\Users\\Dylan\\Downloads\\blender_output.svg'
-# The amount to scale all points.  By default, values are in meters.
+# The amount to scale all points.  By default, values are in meters so 1000.0 would convert into millimeters.
 unit_scale = 1000.0
 
 CommandType = Enum('CommandType', ['MoveTo', 'CurveTo', 'ClosePath', 'LineTo'])
